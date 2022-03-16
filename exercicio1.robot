@@ -21,6 +21,7 @@ Somar dois numeros
     ${SOMA}    Evaluate    ${NUM_A} + ${NUM_B}
     [Return]    ${SOMA}
 
+
 multiply by two
     [Arguments]            ${NUM_A}
     ${DOBRO}    Evaluate    ${NUM_A} * 2
