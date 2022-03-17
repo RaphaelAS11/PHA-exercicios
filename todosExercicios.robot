@@ -20,8 +20,7 @@ Somar dois numeros
     [Arguments]            ${NUM_A}    ${NUM_B}
     ${SOMA}    Evaluate    ${NUM_A} + ${NUM_B}
     [Return]    ${SOMA}
-
-
+ 
 multiply by two
     [Arguments]            ${NUM_A}
     ${DOBRO}    Evaluate    ${NUM_A} * 2
@@ -97,3 +96,8 @@ Lista de paises que ja fui
 Imprimir do numero 5 ou 8
     [Tags]    5ou8
     Imprimir 5 ou 8
+
+Cenario: Pesquisar produto existente
+    [Tags]    Pesquisar
+    Open browser    about:blank    chrome
+    Go To           http://automationpractice.com/index.php    
