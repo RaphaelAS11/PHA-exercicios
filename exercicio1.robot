@@ -27,6 +27,7 @@ multiply by two
     ${DOBRO}    Evaluate    ${NUM_A} * 2
     [Return]    ${DOBRO}
 
+
 *** Comments ***
 Isso é uma seção de comentários
 testando
