@@ -20,9 +20,15 @@ Cenario: Pesquisar produto existente
     Capture Page Screenshot     
 
 Caso de Teste 1: pesquisar produto existente
-    [Tags]    PESQUISA
+    [Tags]    PESQUISA1
     Acessar a página home do site Automation Practice      
-    Digitar o nome do produto no campo de pesquisa   
+    Digitar o nome do produto "blouse" no campo de pesquisa   
     Clicar no botão pesquisar
     Conferir se a imagem do produto foi listada no site    
  
+ Caso de Teste 1: pesquisar produto existente
+    [Tags]    PESQUISA2
+    Acessar a página home do site Automation Practice      
+    Digitar o nome do produto "VOID" no campo de pesquisa   
+    Clicar no botão pesquisar
+    Conferir mensagem "No results were found for your search"

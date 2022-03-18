@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation        Aqui estarão os exercícios da da aula de automação.
+Documentation        Aqui estarão os exercícios da aula de automação.
 
 
 *** Variables ***
@@ -16,11 +16,20 @@ Documentation        Aqui estarão os exercícios da da aula de automação.
 ...        laranja
 
 *** Keywords ***
+
+
+
+Criar E-mail 
+    [Arguments]    ${NOME}    ${SOBRENOME}    ${IDADE}
+    ${EMAIL}    Catenate    SEPARATOR=_    ${NOME}    ${SOBRENOME}    ${IDADE}
+    Log To Console    \n${EMAIL}
+
 Somar dois numeros
     [Arguments]            ${NUM_A}    ${NUM_B}
     ${SOMA}    Evaluate    ${NUM_A} + ${NUM_B}
     [Return]    ${SOMA}
- 
+
+
 multiply by two
     [Arguments]            ${NUM_A}
     ${DOBRO}    Evaluate    ${NUM_A} * 2
@@ -97,7 +106,6 @@ Imprimir do numero 5 ou 8
     [Tags]    5ou8
     Imprimir 5 ou 8
 
-Cenario: Pesquisar produto existente
-    [Tags]    Pesquisar
-    Open browser    about:blank    chrome
-    Go To           http://automationpractice.com/index.php    
+Gerar EMAIL
+    [Tags]    EMAIL
+    Criar E-mail    Raphael    Areas    28    
