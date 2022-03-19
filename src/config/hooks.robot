@@ -7,8 +7,9 @@ Resource    package.robot
 
 *** Keywords ***
 Abrir navegador
-    Set Selenium Implicit Wait    20
-    Open Browser    about:blank    chrome
+    Set Selenium Implicit Wait    ${CONFIG.IMPLICITY_WAIT}
+    Open Browser    about:blank   ${CONFIG.BROWSER} 
+    Go To    ${CONFIG.URL} 
     Maximize Browser Window
 
 Fechar navegador

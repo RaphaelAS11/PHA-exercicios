@@ -4,7 +4,8 @@ Documentation    Este é o gerenciador de dependências
 ##    Libraries    ##
 Library    SeleniumLibrary
 Library    DebugLibrary
-Library    FakerLibrary
+Library    FakerLibrary   
+
 
 ##    Keywords    ##
 Resource    ../auto/keywords/kws_auto_search.robot
@@ -20,3 +21,4 @@ Resource    ../auto/pages/g1_home.robot
 
 ##    Hooks    ##
 Resource    hooks.robot
+Variables   hooks.yaml

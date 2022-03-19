@@ -5,7 +5,6 @@ Resource    ../../config/package.robot
 *** Keywords ***
 
 Acessar a página home do site Automation Practice
-    Go To    ${AUTOMATION_SITE_HOME.url} 
     Title Should Be     ${AUTOMATION_SITE_HOME.title} 
     Wait Until Element Is Visible    id=${AUTOMATION_SITE_HOME.box_id}    10
 
