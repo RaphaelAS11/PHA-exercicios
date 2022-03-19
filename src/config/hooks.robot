@@ -7,6 +7,7 @@ Resource    package.robot
 
 *** Keywords ***
 Abrir navegador
+    Set Selenium Implicit Wait    20
     Open Browser    about:blank    chrome
     Maximize Browser Window
 
