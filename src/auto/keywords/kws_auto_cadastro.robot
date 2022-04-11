@@ -41,7 +41,7 @@ Preencher os dados obrigatórios
     Click Element    xpath=//*[@id="months"]/option[7]
     Click Element    id=${REGISTER.select_years}
     Click Element    xpath=//*[@id="years"]/option[4]
-    Debug   
+       
 
     Input Text    ${REGISTER.first_name}          ${FAKE_NAME}
     Input Text    ${REGISTER.last_name}           ${FAKE_LASTNAME}
@@ -61,7 +61,7 @@ Preencher os dados obrigatórios
 
 #    Input Text    ${REGISTER.state}               ${FAKE_STATE} 
 
-    Input Text    ${REGISTER.postcode}            ${FAKE_ZIPCODE}
+#    Input Text    ${REGISTER.postcode}            ${FAKE_ZIPCODE}
     Input Text    ${REGISTER.mobile}              ${FAKE_MOBILE}  
     Input Text    ${REGISTER.alias}               ${FAKE_ALIAS}
     

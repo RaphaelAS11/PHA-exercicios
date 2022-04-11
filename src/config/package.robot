@@ -3,9 +3,8 @@ Documentation    Este é o gerenciador de dependências
 
 ##    Libraries    ##
 Library    SeleniumLibrary
+Library    FakerLibrary
 Library    DebugLibrary
-Library    FakerLibrary   
-
 
 ##    Keywords    ##
 Resource    ../auto/keywords/kws_auto_search.robot
