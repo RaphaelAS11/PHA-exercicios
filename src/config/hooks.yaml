@@ -1,5 +1,5 @@
 CONFIG:
-  BROWSER: chrome
+  BROWSER: edge
   IMPLICITY_WAIT: 20
   URL: http://automationpractice.com/index.php 
   

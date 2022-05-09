@@ -1,295 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 4.1.3 (Python 3.10.2 on win32)" generated="20220318 22:34:22.435" rpa="false" schemaversion="2">
-<suite id="s1" name="Auto Cadastro" source="C:\Users\rapha\Desktop\Curso Robot PHA\tests\features\auto_cadastro.robot">
-<test id="s1-t1" name="Caso de Teste 04: Adicionar Cliente">
+<robot generator="Robot 5.0 (Python 3.10.4 on win32)" generated="20220509 12:08:11.696" rpa="false" schemaversion="3">
+<suite id="s1" name="Pesquisasgg1" source="C:\Users\user\Desktop\curso pha\PHA-exercicios\tests\features\pesquisasgg1.robot">
+<test id="s1-t1" name="Cenario: Pesquisar sao goncalo no g1" line="11">
 <kw name="Abrir navegador" library="hooks" type="SETUP">
 <kw name="Set Selenium Implicit Wait" library="SeleniumLibrary">
 <arg>${CONFIG.IMPLICITY_WAIT}</arg>
 <doc>Sets the implicit wait value used by Selenium.</doc>
-<status status="PASS" starttime="20220318 22:34:23.113" endtime="20220318 22:34:23.114"/>
+<status status="PASS" starttime="20220509 12:08:12.400" endtime="20220509 12:08:12.401"/>
 </kw>
 <kw name="Open Browser" library="SeleniumLibrary">
 <arg>about:blank</arg>
 <arg>${CONFIG.BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20220318 22:34:23.115" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
-<status status="PASS" starttime="20220318 22:34:23.114" endtime="20220318 22:34:24.581"/>
+<msg timestamp="20220509 12:08:12.401" level="INFO">Opening browser 'edge' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20220509 12:08:12.401" endtime="20220509 12:08:13.816"/>
 </kw>
 <kw name="Go To" library="SeleniumLibrary">
 <arg>${CONFIG.URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20220318 22:34:24.582" level="INFO">Opening url 'http://automationpractice.com/index.php'</msg>
-<status status="PASS" starttime="20220318 22:34:24.581" endtime="20220318 22:34:28.678"/>
+<msg timestamp="20220509 12:08:13.819" level="INFO">Opening url 'http://automationpractice.com/index.php'</msg>
+<status status="PASS" starttime="20220509 12:08:13.817" endtime="20220509 12:08:26.305"/>
 </kw>
 <kw name="Maximize Browser Window" library="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20220318 22:34:28.678" endtime="20220318 22:34:28.808"/>
+<status status="PASS" starttime="20220509 12:08:26.305" endtime="20220509 12:08:26.435"/>
 </kw>
-<status status="PASS" starttime="20220318 22:34:23.113" endtime="20220318 22:34:28.809"/>
+<status status="PASS" starttime="20220509 12:08:12.400" endtime="20220509 12:08:26.435"/>
 </kw>
-<kw name="Acessar a página home do site Automation Practice" library="kws_auto_search">
+<kw name="Acessar a página home do site g1" library="kws_g1">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${G1_HOME_PAGE.url}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20220509 12:08:26.437" level="INFO">Opening url 'https://g1.globo.com/'</msg>
+<status status="PASS" starttime="20220509 12:08:26.436" endtime="20220509 12:08:31.722"/>
+</kw>
 <kw name="Title Should Be" library="SeleniumLibrary">
-<arg>${AUTOMATION_SITE_HOME.title}</arg>
+<arg>${G1_HOME_PAGE.title}</arg>
 <doc>Verifies that the current page title equals ``title``.</doc>
-<msg timestamp="20220318 22:34:28.833" level="INFO">Page title is 'My Store'.</msg>
-<status status="PASS" starttime="20220318 22:34:28.812" endtime="20220318 22:34:28.833"/>
+<msg timestamp="20220509 12:08:31.798" level="INFO">Page title is 'G1 - O portal de notícias da Globo'.</msg>
+<status status="PASS" starttime="20220509 12:08:31.722" endtime="20220509 12:08:31.798"/>
 </kw>
 <kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
-<arg>id=${AUTOMATION_SITE_HOME.box_id}</arg>
+<arg>id=${G1_HOME_PAGE.box_id}</arg>
 <arg>10</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" starttime="20220318 22:34:28.833" endtime="20220318 22:34:28.868"/>
+<status status="PASS" starttime="20220509 12:08:31.798" endtime="20220509 12:08:31.825"/>
 </kw>
-<status status="PASS" starttime="20220318 22:34:28.810" endtime="20220318 22:34:28.868"/>
+<status status="PASS" starttime="20220509 12:08:26.436" endtime="20220509 12:08:31.825"/>
 </kw>
-<kw name="Clicar em &quot;Sign in&quot;" library="kws_auto_cadastro" sourcename="Clicar em &quot;${BUTTON}&quot;">
-<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
-<arg>xpath=//*[contains(text(), '${BUTTON}')]</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" starttime="20220318 22:34:28.869" endtime="20220318 22:34:28.892"/>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<arg>xpath=//*[contains(text(), '${BUTTON}')]</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20220318 22:34:28.892" level="INFO">Clicking element 'xpath=//*[contains(text(), 'Sign in')]'.</msg>
-<status status="PASS" starttime="20220318 22:34:28.892" endtime="20220318 22:34:29.959"/>
-</kw>
-<status status="PASS" starttime="20220318 22:34:28.869" endtime="20220318 22:34:29.960"/>
-</kw>
-<kw name="Informar um e-mail válido" library="kws_auto_cadastro">
-<kw name="Free Email" library="FakerLibrary">
-<var>${FAKE_EMAIL}</var>
-<msg timestamp="20220318 22:34:29.962" level="INFO">${FAKE_EMAIL} = longdebra@yahoo.com</msg>
-<status status="PASS" starttime="20220318 22:34:29.962" endtime="20220318 22:34:29.962"/>
-</kw>
-<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
-<arg>email_create</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" starttime="20220318 22:34:29.963" endtime="20220318 22:34:30.426"/>
-</kw>
+<kw name="Digitar o tópico no campo de pesquisa" library="kws_g1">
 <kw name="Input Text" library="SeleniumLibrary">
-<arg>email_create</arg>
-<arg>${FAKE_EMAIL}</arg>
+<arg>id=${G1_HOME_PAGE.box_id}</arg>
+<arg>${SEARCH_TOPIC}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<msg timestamp="20220318 22:34:30.427" level="INFO">Typing text 'longdebra@yahoo.com' into text field 'email_create'.</msg>
-<status status="PASS" starttime="20220318 22:34:30.426" endtime="20220318 22:34:30.497"/>
+<msg timestamp="20220509 12:08:31.828" level="INFO">Typing text 'São Gonçalo' into text field 'id=busca-campo'.</msg>
+<status status="PASS" starttime="20220509 12:08:31.827" endtime="20220509 12:08:31.954"/>
 </kw>
-<status status="PASS" starttime="20220318 22:34:29.960" endtime="20220318 22:34:30.497"/>
+<status status="PASS" starttime="20220509 12:08:31.826" endtime="20220509 12:08:31.954"/>
 </kw>
-<kw name="Clicar em Create an account" library="kws_auto_cadastro">
-<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
-<arg>id=SubmitCreate</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" starttime="20220318 22:34:30.498" endtime="20220318 22:34:30.514"/>
+<kw name="Apertar enter no pesquisar" library="kws_g1">
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>id=${G1_HOME_PAGE.box_id}</arg>
+<arg>ENTER</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20220509 12:08:31.956" level="INFO">Sending key(s) ('ENTER',) to id=busca-campo element.</msg>
+<msg timestamp="20220509 12:08:32.299" level="INFO">Pressing special key ENTER to element.</msg>
+<msg timestamp="20220509 12:08:32.299" level="INFO">Releasing special key ENTER.</msg>
+<status status="PASS" starttime="20220509 12:08:31.955" endtime="20220509 12:08:32.352"/>
 </kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<arg>id=SubmitCreate</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20220318 22:34:30.515" level="INFO">Clicking element 'id=SubmitCreate'.</msg>
-<status status="PASS" starttime="20220318 22:34:30.515" endtime="20220318 22:34:30.554"/>
-</kw>
-<status status="PASS" starttime="20220318 22:34:30.498" endtime="20220318 22:34:30.554"/>
-</kw>
-<kw name="Preencher os dados obrigatórios" library="kws_auto_cadastro">
-<kw name="First Name" library="FakerLibrary">
-<var>${FAKE_NAME}</var>
-<msg timestamp="20220318 22:34:30.556" level="INFO">${FAKE_NAME} = Sarah</msg>
-<status status="PASS" starttime="20220318 22:34:30.556" endtime="20220318 22:34:30.556"/>
-</kw>
-<kw name="Last Name" library="FakerLibrary">
-<var>${FAKE_LASTNAME}</var>
-<msg timestamp="20220318 22:34:30.557" level="INFO">${FAKE_LASTNAME} = Kaiser</msg>
-<status status="PASS" starttime="20220318 22:34:30.557" endtime="20220318 22:34:30.557"/>
-</kw>
-<kw name="Password" library="FakerLibrary">
-<var>${FAKE_PSSWD}</var>
-<doc>Generate a random password of the specified ``length``.</doc>
-<msg timestamp="20220318 22:34:30.557" level="INFO">${FAKE_PSSWD} = )cFVDvy$)3</msg>
-<status status="PASS" starttime="20220318 22:34:30.557" endtime="20220318 22:34:30.557"/>
-</kw>
-<kw name="Street Address" library="FakerLibrary">
-<var>${FAKE_ADDRESS1}</var>
-<doc>:example: '791 Crist Parks'</doc>
-<msg timestamp="20220318 22:34:30.558" level="INFO">${FAKE_ADDRESS1} = 3406 Joseph Highway Apt. 839</msg>
-<status status="PASS" starttime="20220318 22:34:30.557" endtime="20220318 22:34:30.558"/>
-</kw>
-<kw name="City" library="FakerLibrary">
-<var>${FAKE_CITY}</var>
-<doc>:example: 'Sashabury'</doc>
-<msg timestamp="20220318 22:34:30.558" level="INFO">${FAKE_CITY} = South Kellyberg</msg>
-<status status="PASS" starttime="20220318 22:34:30.558" endtime="20220318 22:34:30.558"/>
-</kw>
-<kw name="Zipcode" library="FakerLibrary">
-<var>${FAKE_ZIPECODE}</var>
-<msg timestamp="20220318 22:34:30.558" level="INFO">${FAKE_ZIPECODE} = 34582</msg>
-<status status="PASS" starttime="20220318 22:34:30.558" endtime="20220318 22:34:30.558"/>
-</kw>
-<kw name="Company" library="FakerLibrary">
-<var>${FAKE_COMPANY}</var>
-<doc>:example: 'Acme Ltd'</doc>
-<msg timestamp="20220318 22:34:30.559" level="INFO">${FAKE_COMPANY} = Howe Ltd</msg>
-<status status="PASS" starttime="20220318 22:34:30.558" endtime="20220318 22:34:30.559"/>
-</kw>
-<kw name="Phone Number" library="FakerLibrary">
-<var>${FAKE_MOBILE}</var>
-<msg timestamp="20220318 22:34:30.559" level="INFO">${FAKE_MOBILE} = 462-573-1040</msg>
-<status status="PASS" starttime="20220318 22:34:30.559" endtime="20220318 22:34:30.559"/>
-</kw>
-<kw name="Name" library="FakerLibrary">
-<var>${FAKE_ALIAS}</var>
-<doc>:example 'John Doe'</doc>
-<msg timestamp="20220318 22:34:30.559" level="INFO">${FAKE_ALIAS} = Dustin Brown</msg>
-<status status="PASS" starttime="20220318 22:34:30.559" endtime="20220318 22:34:30.559"/>
-</kw>
-<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
-<arg>id=${REGISTER.form}</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" starttime="20220318 22:34:30.559" endtime="20220318 22:34:31.939"/>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<arg>${REGISTER.check_mr}</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20220318 22:34:31.940" level="INFO">Clicking element 'uniform-id_gender1'.</msg>
-<status status="PASS" starttime="20220318 22:34:31.939" endtime="20220318 22:34:32.604"/>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<arg>id=${REGISTER.select_days}</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20220318 22:34:32.605" level="INFO">Clicking element 'id=days'.</msg>
-<status status="PASS" starttime="20220318 22:34:32.604" endtime="20220318 22:34:32.658"/>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<arg>xpath=//*[@id="days"]/option[2]</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20220318 22:34:32.660" level="INFO">Clicking element 'xpath=//*[@id="days"]/option[2]'.</msg>
-<status status="PASS" starttime="20220318 22:34:32.659" endtime="20220318 22:34:32.695"/>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<arg>id=${REGISTER.select_months}</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20220318 22:34:32.697" level="INFO">Clicking element 'id=months'.</msg>
-<status status="PASS" starttime="20220318 22:34:32.696" endtime="20220318 22:34:32.763"/>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<arg>xpath=//*[@id="months"]/option[7]</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20220318 22:34:32.763" level="INFO">Clicking element 'xpath=//*[@id="months"]/option[7]'.</msg>
-<status status="PASS" starttime="20220318 22:34:32.763" endtime="20220318 22:34:32.800"/>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<arg>id=${REGISTER.select_years}</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20220318 22:34:32.802" level="FAIL">Resolving variable '${REGISTER.select_years}' failed: AttributeError: select_years</msg>
-<status status="FAIL" starttime="20220318 22:34:32.801" endtime="20220318 22:34:32.802"/>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<arg>xpath=//*[@id="years"]/option[4]</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.802" endtime="20220318 22:34:32.802"/>
-</kw>
-<kw name="Debug" library="DebugLibrary">
-<doc>Open a interactive shell, run any RobotFramework keywords.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.802" endtime="20220318 22:34:32.802"/>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>${REGISTER.first_name}</arg>
-<arg>${FAKE_NAME}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.802" endtime="20220318 22:34:32.802"/>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>${REGISTER.last_name}</arg>
-<arg>${FAKE_LASTNAME}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.802" endtime="20220318 22:34:32.802"/>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>${REGISTER.password}</arg>
-<arg>${FAKE_PSSWD}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.802" endtime="20220318 22:34:32.802"/>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>${REGISTER.address_name}</arg>
-<arg>${FAKE_NAME}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.803" endtime="20220318 22:34:32.803"/>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>${REGISTER.address_lastname}</arg>
-<arg>${FAKE_LASTNAME}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.803" endtime="20220318 22:34:32.803"/>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>${REGISTER.company}</arg>
-<arg>${FAKE_COMPANY}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.803" endtime="20220318 22:34:32.803"/>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>${REGISTER.address1}</arg>
-<arg>${FAKE_ADDRESS1}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.803" endtime="20220318 22:34:32.803"/>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>${REGISTER.city}</arg>
-<arg>${FAKE_CITY}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.803" endtime="20220318 22:34:32.803"/>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>${REGISTER.postcode}</arg>
-<arg>${FAKE_ZIPCODE}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.803" endtime="20220318 22:34:32.803"/>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>${REGISTER.mobile}</arg>
-<arg>${FAKE_MOBILE}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.803" endtime="20220318 22:34:32.803"/>
-</kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>${REGISTER.alias}</arg>
-<arg>${FAKE_ALIAS}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" starttime="20220318 22:34:32.804" endtime="20220318 22:34:32.804"/>
-</kw>
-<status status="FAIL" starttime="20220318 22:34:30.555" endtime="20220318 22:34:32.804"/>
-</kw>
-<kw name="Submeter cadastro" library="kws_auto_cadastro">
-<status status="NOT RUN" starttime="20220318 22:34:32.807" endtime="20220318 22:34:32.807"/>
-</kw>
-<kw name="Conferir se o cadastro foi efetuado com sucesso" library="kws_auto_cadastro">
-<status status="NOT RUN" starttime="20220318 22:34:32.808" endtime="20220318 22:34:32.808"/>
+<status status="PASS" starttime="20220509 12:08:31.954" endtime="20220509 12:08:32.352"/>
 </kw>
 <kw name="Fechar navegador" library="hooks" type="TEARDOWN">
 <kw name="Capture Page Screenshot" library="SeleniumLibrary">
 <doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<msg timestamp="20220318 22:34:32.968" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-3.png"&gt;&lt;img src="selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
-<status status="PASS" starttime="20220318 22:34:32.809" endtime="20220318 22:34:32.968"/>
+<msg timestamp="20220509 12:08:34.961" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220509 12:08:32.354" endtime="20220509 12:08:34.961"/>
 </kw>
 <kw name="Close Browser" library="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20220318 22:34:32.968" endtime="20220318 22:34:35.213"/>
+<status status="PASS" starttime="20220509 12:08:34.961" endtime="20220509 12:08:37.240"/>
 </kw>
-<status status="PASS" starttime="20220318 22:34:32.808" endtime="20220318 22:34:35.214"/>
+<status status="PASS" starttime="20220509 12:08:32.353" endtime="20220509 12:08:37.240"/>
 </kw>
-<status status="FAIL" starttime="20220318 22:34:23.112" endtime="20220318 22:34:35.216">Resolving variable '${REGISTER.select_years}' failed: AttributeError: select_years</status>
+<tag>SGNOG1</tag>
+<status status="PASS" starttime="20220509 12:08:12.399" endtime="20220509 12:08:37.241"/>
 </test>
-<doc>Aqui estará o cenario de testes sobre o cadastro do site automation</doc>
-<status status="FAIL" starttime="20220318 22:34:22.436" endtime="20220318 22:34:35.218"/>
+<doc>This applicantion should search news of São Gonçalo in the Site g1.globo.com</doc>
+<status status="PASS" starttime="20220509 12:08:11.698" endtime="20220509 12:08:37.242"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1" skip="0">All Tests</stat>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
+<stat pass="1" fail="0" skip="0">SGNOG1</stat>
 </tag>
 <suite>
-<stat pass="0" fail="1" skip="0" id="s1" name="Auto Cadastro">Auto Cadastro</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="Pesquisasgg1">Pesquisasgg1</stat>
 </suite>
 </statistics>
 <errors>

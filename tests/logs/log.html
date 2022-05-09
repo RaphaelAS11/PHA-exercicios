@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 4.1.3 (Python 3.10.2 on win32)" name="Generator">
+<meta content="Robot Framework 5.0 (Python 3.10.4 on win32)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKcAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAAqAAAAAAAAAAAAAAAAAAAALIAAAD/AAAA4AAAANwAAADcAAAA3AAAANwAAADcAAAA3AAAANwAAADcAAAA4AAAAP8AAACxAAAAAAAAAKYAAAD/AAAAuwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC/AAAA/wAAAKkAAAD6AAAAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN8AAAD/AAAA+gAAAMMAAAAAAAAAAgAAAGsAAABrAAAAawAAAGsAAABrAAAAawAAAGsAAABrAAAADAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAIsAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAANEAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAAAAAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAFAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAADwAAAB8AAAAAAAAAGAAAABcAAAAAAAAAH8AAABKAAAAAAAAAAAAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAADCAAAA/wAAACkAAADqAAAA4QAAAAAAAAD7AAAA/wAAALAAAAAGAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAIwAAAP4AAAD/AAAA/wAAAGAAAAAAAAAAAAAAAMkAAAD/AAAAigAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAAAAAAAIAAAAcAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAA2gAAAP8AAAD7AAAAywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN4AAAD/AAAAqwAAAP8AAACvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALIAAAD/AAAAsgAAAAAAAAC5AAAA/wAAAMoAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMkAAAD/AAAAvAAAAAAAAAAAAAAAAAAAAKwAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAArQAAAAAAAAAAwAMAAIABAAAf+AAAP/wAAD/8AAAgBAAAP/wAAD/8AAA//AAAJIwAADHEAAA//AAAP/wAAB/4AACAAQAAwAMAAA==">
 <style media="all" type="text/css">
 /* Generic and misc styles */
@@ -318,6 +318,9 @@ th.stats-col-graph:hover {
     top: 0;
     padding: 3px;
     cursor: default;
+}
+.element-header .label {
+    margin-right: 0.5em;
 }
 .name {
     font-weight: bold;
@@ -966,6 +969,7 @@ window.model = (function () {
     }
     function Keyword(data) {
         var kw = createModelObject(data);
+        var flatTypes = ['RETURN', 'BREAK', 'CONTINUE'];
         kw.libname = data.libname;
         kw.fullName = (kw.libname ? kw.libname + '.' : '') + kw.name;
         kw.type = data.type;
@@ -1350,8 +1354,8 @@ window.testdata = function () {
     var _statistics = null;
     var LEVELS = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FAIL', 'SKIP'];
     var STATUSES = ['FAIL', 'PASS', 'SKIP', 'NOT RUN'];
-    var KEYWORD_TYPES = ['KEYWORD', 'SETUP', 'TEARDOWN', 'FOR', 'VAR', 'IF', 'ELSE IF', 'ELSE'];
-    var MESSAGE_TYPE = 8;
+    var KEYWORD_TYPES = ['KEYWORD', 'SETUP', 'TEARDOWN', 'FOR', 'ITERATION', 'IF', 'ELSE IF', 'ELSE', 'RETURN',
+                         'TRY', 'EXCEPT', 'FINALLY', 'WHILE', 'CONTINUE', 'BREAK'];
     function addElement(elem) {
         if (!elem.id)
             elem.id = uniqueId();
@@ -1372,10 +1376,10 @@ window.testdata = function () {
                 elapsed];
     }
     function createMessage(element, strings) {
-        return model.Message(LEVELS[element[2]],
-                             util.timestamp(element[1]),
-                             strings.get(element[3]),
-                             strings.get(element[4]));
+        return model.Message(LEVELS[element[1]],
+                             util.timestamp(element[0]),
+                             strings.get(element[2]),
+                             strings.get(element[3]));
     }
     function parseStatus(stats) {
         return STATUSES[stats[0]];
@@ -1386,7 +1390,7 @@ window.testdata = function () {
         };
     }
     function createBodyItem(parent, element, strings, index) {
-        if (element[0] == MESSAGE_TYPE)
+        if (element.length < 5)
             return createMessage(element, strings);
         var messages = util.filter(parent.children(), function (child) {
             return child.type == 'message';
@@ -1799,25 +1803,25 @@ function stopPropagation(event) {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,4,[],[0,0,12782],[],[[5,0,0,[],[0,676,12104,6],[[1,7,8,0,0,0,0,0,[1,677,5696],[[0,9,10,0,11,12,0,0,[1,677,1],[]],[0,13,10,0,14,15,0,0,[1,678,1467],[[8,679,2,16]]],[0,17,10,0,18,19,0,0,[1,2145,4097],[[8,2146,2,20]]],[0,21,10,0,22,0,0,0,[1,6242,130],[]]]],[0,23,24,0,0,0,0,0,[1,6374,58],[[0,25,10,0,26,27,0,0,[1,6376,21],[[8,6397,2,28]]],[0,29,10,0,30,31,0,0,[1,6397,35],[]]]],[0,32,33,0,0,0,0,0,[1,6433,1091],[[0,29,10,0,30,34,0,0,[1,6433,23],[]],[0,35,10,0,36,34,0,0,[1,6456,1067],[[8,6456,2,37]]]]],[0,38,33,0,0,0,0,0,[1,7524,537],[[0,39,40,0,0,0,41,0,[1,7526,0],[[8,7526,2,42]]],[0,29,10,0,30,43,0,0,[1,7527,463],[]],[0,44,10,0,45,46,0,0,[1,7990,71],[[8,7991,2,47]]]]],[0,48,33,0,0,0,0,0,[1,8062,56],[[0,29,10,0,30,49,0,0,[1,8062,16],[]],[0,35,10,0,36,49,0,0,[1,8079,39],[[8,8079,2,50]]]]],[0,51,33,0,0,0,0,0,[0,8119,2249],[[0,52,40,0,0,0,53,0,[1,8120,0],[[8,8120,2,54]]],[0,55,40,0,0,0,56,0,[1,8121,0],[[8,8121,2,57]]],[0,58,40,0,59,0,60,0,[1,8121,0],[[8,8121,2,61]]],[0,62,40,0,63,0,64,0,[1,8121,1],[[8,8122,2,65]]],[0,66,40,0,67,0,68,0,[1,8122,0],[[8,8122,2,69]]],[0,70,40,0,0,0,71,0,[1,8122,0],[[8,8122,2,72]]],[0,73,40,0,74,0,75,0,[1,8122,1],[[8,8123,2,76]]],[0,77,40,0,0,0,78,0,[1,8123,0],[[8,8123,2,79]]],[0,80,40,0,81,0,82,0,[1,8123,0],[[8,8123,2,83]]],[0,29,10,0,30,84,0,0,[1,8123,1380],[]],[0,35,10,0,36,85,0,0,[1,9503,665],[[8,9504,2,86]]],[0,35,10,0,36,87,0,0,[1,10168,54],[[8,10169,2,88]]],[0,35,10,0,36,89,0,0,[1,10223,36],[[8,10224,2,90]]],[0,35,10,0,36,91,0,0,[1,10260,67],[[8,10261,2,92]]],[0,35,10,0,36,93,0,0,[1,10327,37],[[8,10327,2,94]]],[0,35,10,0,36,95,0,0,[0,10365,1],[[8,10366,5,6]]],[0,35,10,0,36,96,0,0,[3,10366,0],[]],[0,97,98,0,99,0,0,0,[3,10366,0],[]],[0,44,10,0,45,100,0,0,[3,10366,0],[]],[0,44,10,0,45,101,0,0,[3,10366,0],[]],[0,44,10,0,45,102,0,0,[3,10366,0],[]],[0,44,10,0,45,103,0,0,[3,10367,0],[]],[0,44,10,0,45,104,0,0,[3,10367,0],[]],[0,44,10,0,45,105,0,0,[3,10367,0],[]],[0,44,10,0,45,106,0,0,[3,10367,0],[]],[0,44,10,0,45,107,0,0,[3,10367,0],[]],[0,44,10,0,45,108,0,0,[3,10367,0],[]],[0,44,10,0,45,109,0,0,[3,10367,0],[]],[0,44,10,0,45,110,0,0,[3,10368,0],[]]]],[0,111,33,0,0,0,0,0,[3,10371,0],[]],[0,112,33,0,0,0,0,0,[3,10372,0],[]],[2,113,8,0,0,0,0,0,[1,10372,2406],[[0,114,10,0,115,0,0,0,[1,10373,159],[[8,10532,2,116]]],[0,117,10,0,118,0,0,0,[1,10532,2245],[]]]]]]],[],[1,0,1,0]];
+window.output["suite"] = [1,2,3,4,[],[1,0,25544],[],[[5,0,0,[6],[1,701,24842],[[1,7,8,0,0,0,0,0,[1,702,14035],[[0,9,10,0,11,12,0,0,[1,702,1],[]],[0,13,10,0,14,15,0,0,[1,703,1415],[[703,2,16]]],[0,17,10,0,18,19,0,0,[1,2119,12488],[[2121,2,20]]],[0,21,10,0,22,0,0,0,[1,14607,130],[]]]],[0,23,24,0,0,0,0,0,[1,14738,5389],[[0,17,10,0,18,25,0,0,[1,14738,5286],[[14739,2,26]]],[0,27,10,0,28,29,0,0,[1,20024,76],[[20100,2,30]]],[0,31,10,0,32,33,0,0,[1,20100,27],[]]]],[0,34,24,0,0,0,0,0,[1,20128,128],[[0,35,10,0,36,37,0,0,[1,20129,127],[[20130,2,38]]]]],[0,39,24,0,0,0,0,0,[1,20256,398],[[0,40,10,0,41,42,0,0,[1,20257,397],[[20258,2,43],[20601,2,44],[20601,2,45]]]]],[2,46,8,0,0,0,0,0,[1,20655,4887],[[0,47,10,0,48,0,0,0,[1,20656,2607],[[23263,2,49]]],[0,50,10,0,51,0,0,0,[1,23263,2279],[]]]]]]],[],[1,1,0,0]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*Auto Cadastro","*C:\\Users\\rapha\\Desktop\\Curso Robot PHA\\tests\\features\\auto_cadastro.robot","*../features/auto_cadastro.robot","*<p>Aqui estará o cenario de testes sobre o cadastro do site automation\x3c/p>","*Caso de Teste 04: Adicionar Cliente","*Resolving variable '${REGISTER.select_years}' failed: AttributeError: select_years","*Abrir navegador","*hooks","*Set Selenium Implicit Wait","*SeleniumLibrary","*<p>Sets the implicit wait value used by Selenium.\x3c/p>","*${CONFIG.IMPLICITY_WAIT}","*Open Browser","*<p>Opens a new browser instance to the optional <code>url\x3c/code>.\x3c/p>","*about:blank, ${CONFIG.BROWSER}","*Opening browser 'chrome' to base url 'about:blank'.","*Go To","*<p>Navigates the current browser window to the provided <code>url\x3c/code>.\x3c/p>","*${CONFIG.URL}","*Opening url '<a href=\"http://automationpractice.com/index.php\">http://automationpractice.com/index.php\x3c/a>'","*Maximize Browser Window","*<p>Maximizes current browser window.\x3c/p>","*Acessar a página home do site Automation Practice","*kws_auto_search","*Title Should Be","*<p>Verifies that the current page title equals <code>title\x3c/code>.\x3c/p>","*${AUTOMATION_SITE_HOME.title}","*Page title is 'My Store'.","*Wait Until Element Is Visible","*<p>Waits until the element <code>locator\x3c/code> is visible.\x3c/p>","*id=${AUTOMATION_SITE_HOME.box_id}, 10","*Clicar em &quot;Sign in&quot;","*kws_auto_cadastro","*xpath=//*[contains(text(), '${BUTTON}')]","*Click Element","*<p>Click the element identified by <code>locator\x3c/code>.\x3c/p>","*Clicking element 'xpath=//*[contains(text(), 'Sign in')]'.","*Informar um e-mail válido","*Free Email","*FakerLibrary","*${FAKE_EMAIL}","*${FAKE_EMAIL} = longdebra@yahoo.com","*email_create","*Input Text","*<p>Types the given <code>text\x3c/code> into the text field identified by <code>locator\x3c/code>.\x3c/p>","*email_create, ${FAKE_EMAIL}","*Typing text 'longdebra@yahoo.com' into text field 'email_create'.","*Clicar em Create an account","*id=SubmitCreate","*Clicking element 'id=SubmitCreate'.","*Preencher os dados obrigatórios","*First Name","*${FAKE_NAME}","*${FAKE_NAME} = Sarah","*Last Name","*${FAKE_LASTNAME}","*${FAKE_LASTNAME} = Kaiser","*Password","*<p>Generate a random password of the specified <code>length\x3c/code>.\x3c/p>","*${FAKE_PSSWD}","*${FAKE_PSSWD} = )cFVDvy$)3","*Street Address","*<p>:example: '791 Crist Parks'\x3c/p>","*${FAKE_ADDRESS1}","*${FAKE_ADDRESS1} = 3406 Joseph Highway Apt. 839","*City","*<p>:example: 'Sashabury'\x3c/p>","*${FAKE_CITY}","*${FAKE_CITY} = South Kellyberg","*Zipcode","*${FAKE_ZIPECODE}","*${FAKE_ZIPECODE} = 34582","*Company","*<p>:example: 'Acme Ltd'\x3c/p>","*${FAKE_COMPANY}","*${FAKE_COMPANY} = Howe Ltd","*Phone Number","*${FAKE_MOBILE}","*${FAKE_MOBILE} = 462-573-1040","*Name","*<p>:example 'John Doe'\x3c/p>","*${FAKE_ALIAS}","*${FAKE_ALIAS} = Dustin Brown","*id=${REGISTER.form}","*${REGISTER.check_mr}","*Clicking element 'uniform-id_gender1'.","*id=${REGISTER.select_days}","*Clicking element 'id=days'.","*xpath=//*[@id=\"days\"]/option[2]","*Clicking element 'xpath=//*[@id=\"days\"]/option[2]'.","*id=${REGISTER.select_months}","*Clicking element 'id=months'.","*xpath=//*[@id=\"months\"]/option[7]","*Clicking element 'xpath=//*[@id=\"months\"]/option[7]'.","*id=${REGISTER.select_years}","*xpath=//*[@id=\"years\"]/option[4]","*Debug","*DebugLibrary","*<p>Open a interactive shell, run any RobotFramework keywords.\x3c/p>","*${REGISTER.first_name}, ${FAKE_NAME}","*${REGISTER.last_name}, ${FAKE_LASTNAME}","*${REGISTER.password}, ${FAKE_PSSWD}","*${REGISTER.address_name}, ${FAKE_NAME}","*${REGISTER.address_lastname}, ${FAKE_LASTNAME}","*${REGISTER.company}, ${FAKE_COMPANY}","*${REGISTER.address1}, ${FAKE_ADDRESS1}","*${REGISTER.city}, ${FAKE_CITY}","*${REGISTER.postcode}, ${FAKE_ZIPCODE}","*${REGISTER.mobile}, ${FAKE_MOBILE}","*${REGISTER.alias}, ${FAKE_ALIAS}","*Submeter cadastro","*Conferir se o cadastro foi efetuado com sucesso","*Fechar navegador","*Capture Page Screenshot","*<p>Takes a screenshot of the current page and embeds it into a log file.\x3c/p>","*\x3c/td>\x3c/tr><tr><td colspan=\"3\"><a href=\"selenium-screenshot-3.png\"><img src=\"selenium-screenshot-3.png\" width=\"800px\">\x3c/a>","*Close Browser","*<p>Closes the current browser.\x3c/p>"]);
+window.output["strings"] = window.output["strings"].concat(["*","*Pesquisasgg1","*C:\\Users\\user\\Desktop\\curso pha\\PHA-exercicios\\tests\\features\\pesquisasgg1.robot","*../features/pesquisasgg1.robot","*<p>This applicantion should search news of São Gonçalo in the Site g1.globo.com\x3c/p>","*Cenario: Pesquisar sao goncalo no g1","*SGNOG1","*Abrir navegador","*hooks","*Set Selenium Implicit Wait","*SeleniumLibrary","*<p>Sets the implicit wait value used by Selenium.\x3c/p>","*${CONFIG.IMPLICITY_WAIT}","*Open Browser","*<p>Opens a new browser instance to the optional <code>url\x3c/code>.\x3c/p>","*about:blank, ${CONFIG.BROWSER}","*Opening browser 'edge' to base url 'about:blank'.","*Go To","*<p>Navigates the current browser window to the provided <code>url\x3c/code>.\x3c/p>","*${CONFIG.URL}","*Opening url '<a href=\"http://automationpractice.com/index.php\">http://automationpractice.com/index.php\x3c/a>'","*Maximize Browser Window","*<p>Maximizes current browser window.\x3c/p>","*Acessar a página home do site g1","*kws_g1","*${G1_HOME_PAGE.url}","*Opening url '<a href=\"https://g1.globo.com/\">https://g1.globo.com/\x3c/a>'","*Title Should Be","*<p>Verifies that the current page title equals <code>title\x3c/code>.\x3c/p>","*${G1_HOME_PAGE.title}","*Page title is 'G1 - O portal de notícias da Globo'.","*Wait Until Element Is Visible","*<p>Waits until the element <code>locator\x3c/code> is visible.\x3c/p>","*id=${G1_HOME_PAGE.box_id}, 10","*Digitar o tópico no campo de pesquisa","*Input Text","*<p>Types the given <code>text\x3c/code> into the text field identified by <code>locator\x3c/code>.\x3c/p>","*id=${G1_HOME_PAGE.box_id}, ${SEARCH_TOPIC}","*Typing text 'São Gonçalo' into text field 'id=busca-campo'.","*Apertar enter no pesquisar","*Press Keys","*<p>Simulates the user pressing key(s) to an element or on the active browser.\x3c/p>","*id=${G1_HOME_PAGE.box_id}, ENTER","*Sending key(s) ('ENTER',) to id=busca-campo element.","*Pressing special key ENTER to element.","*Releasing special key ENTER.","*Fechar navegador","*Capture Page Screenshot","*<p>Takes a screenshot of the current page and embeds it into a log file.\x3c/p>","*\x3c/td>\x3c/tr><tr><td colspan=\"3\"><a href=\"selenium-screenshot-1.png\"><img src=\"selenium-screenshot-1.png\" width=\"800px\">\x3c/a>","*Close Browser","*<p>Closes the current browser.\x3c/p>"]);
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:00:12","fail":1,"label":"All Tests","pass":0,"skip":0}],[],[{"elapsed":"00:00:13","fail":1,"id":"s1","label":"Auto Cadastro","name":"Auto Cadastro","pass":0,"skip":0}]];
+window.output["stats"] = [[{"elapsed":"00:00:25","fail":0,"label":"All Tests","pass":1,"skip":0}],[{"elapsed":"00:00:25","fail":0,"label":"SGNOG1","pass":1,"skip":0}],[{"elapsed":"00:00:26","fail":0,"id":"s1","label":"Pesquisasgg1","name":"Pesquisasgg1","pass":1,"skip":0}]];
 </script>
 <script type="text/javascript">
 window.output["errors"] = [];
 </script>
 <script type="text/javascript">
-window.output["baseMillis"] = 1647653662436;
+window.output["baseMillis"] = 1652108891698;
 </script>
 <script type="text/javascript">
-window.output["generated"] = 12800;
+window.output["generated"] = 25556;
 </script>
 <script type="text/javascript">
 window.output["expand_keywords"] = null;
@@ -2123,7 +2127,7 @@ function addExecutionLog(main) {
     <div class="element-header closed" onclick="toggleKeyword('${id}')">
       <div class="element-header-left" title="${type}  {{if name}}{{html fullName}}  {{/if}}[${status}]">
         <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
-        <span class="label keyword ${status.toLowerCase()}">${type}</span>
+        <span class="label ${status.toLowerCase()}">${type}</span>
         <span>{{html assign}}</span>
         <span class="name"><span class="parent-name">{{html libname}}{{if libname}} . {{/if}}</span>{{html name}}</span>
         <span class="arg">{{html arguments}}</span>
@@ -2131,7 +2135,7 @@ function addExecutionLog(main) {
       <div class="element-header-right" onclick="stopPropagation(event)">
         <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
         <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
-        <a class="link" title="Link to this keyword" href="#${id}" onclick="makeElementVisible('${id}')"></a>
+        <a class="link" title="Link to this item" href="#${id}" onclick="makeElementVisible('${id}')"></a>
       </div>
       <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
